@@ -17,7 +17,7 @@ from datetime import datetime, time
 #     medium: 69
 #     high: 73
 #     sun_offset: -2
-#   temperatures:
+#   speeds:
 #     low: 30
 #     medium: 50
 #     high: 90
