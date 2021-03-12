@@ -37,11 +37,17 @@ auto_fan_speed_master_bedroom:
   temp_sensor: sensor.thermostat_master_bedroom_temperature
   fan: fan.master_bedroom_fan
   sun: sun.sun
-  speeds:
+  override: input_boolean.fan_override
+  temperatures:
     low: 67
     medium: 69
     high: 73
     sun_offset: -2
+  speeds:
+    low: 30
+    medium: 50
+    high: 90
+    off: 0
   time:
     start: "21:00:00"
     end: "09:30:00"
@@ -56,10 +62,15 @@ key | optional | type | description
 `temp_sensor` | **False** | sensor | the local room temperature sensor
 `fan` | **False** | fan | fan switch
 `sun` | **False** | sun | home assistant sun [sun](https://www.home-assistant.io/integrations/sun/) sensor
-`speeds\|low` | **False** | number | The fan will be switched "off" below this temperature and "low speed" between low and medium temperatures  
-`speeds\|medium` | **False** | number | The fan will be at "medium speed" between medium and high temperatures
-`speeds\|high` | **False** | number | The fan will be at "high speed" at or above this temperature
-`speeds\|sun_offset` | **False** | number | normally "-ve". how much of the temperature to adjust by when the sun rises and is above horizon
+`override` | True | entity | input_boolean or switch entity used to turn override control on or off
+`temperatures\|low` | **False** | number | The fan will be switched "off" below this temperature and "low speed" between low and medium temperatures  
+`temperatures\|medium` | **False** | number | The fan will be at "medium speed" between medium and high temperatures
+`temperatures\|high` | **False** | number | The fan will be at "high speed" at or above this temperature
+`temperatures\|sun_offset` | **False** | number | normally "-ve". how much of the temperature to adjust by when the sun rises and is above horizon
+`speeds\|low` | **False** | number | Speed percentage the fan will be at when at the "low" temperature
+`speeds\|medium` | **False** | number | Speed percentage the fan will be at when at the "medium" temperature
+`speeds\|high` | **False** | number | Speed percentage the fan will be at when at the "high" temperature
+`speeds\|off` | **False** | number | If using *turn_off_at_end_time* this will set the speed during that time. Omitting, or setting to 0 will turn the fan off during this time.
 `time\|start` | **False** | time | Only control between start and end times. if you only want to auto control the fan speed at night for example. This is in 24h format
 `time\|end` | **False** | time | Every start has an end. This one too :smirk:
 `time\|turn_off_at_end_time` | **False** | bool | Turn off the fan at the end time, to save energy and ensure that the fan doesnt run all day.
